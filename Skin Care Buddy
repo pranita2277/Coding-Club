@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkinCare Buddy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="bg-white/90 backdrop-blur-md py-4 px-6 flex justify-between items-center sticky top-0 z-50 border-b border-gray-100 shadow-sm">
+    <div class="flex items-center space-x-2">
+        <div class="w-10 h-10 bg-gradient-to-r from-[#76a8d7] to-[#d46cb0] rounded-xl flex items-center justify-center">
+            <i class="fas fa-spa text-white text-xl"></i>
+        </div>
+        <h1 class="text-2xl font-bold text-gray-800">SkinCare Buddy</h1>
+    </div>
+    <div class="hidden md:flex items-center space-x-6">
+        <div class="hidden md:flex items-center space-x-6">
+         <a href="#" onclick="showPage('login')" class="nav-link text-gray-700 hover:text-[#d46cb0] font-medium">Login</a>
+         <a href="#" onclick="showPage('home')" class="nav-link text-gray-700 hover:text-[#d46cb0] font-medium">Home</a>
+         <a href="concern.html" class="nav-link text-gray-700 hover:text-[#d46cb0] font-medium">Concerns</a>
+         <a href="#" onclick="showPage('products')" class="nav-link text-gray-700 hover:text-[#d46cb0] font-medium">Products</a>
+         
+</div>
+
+    </div>
+    <button class="md:hidden text-gray-700">
+        <i class="fas fa-bars text-xl"></i>
+    </button>
+  </nav>
+  <!-- Home Page -->
+  <div id="home-page" class="page-container active">
+
+    <!-- Hero Section -->
+    <section class="hero-section py-20">
+      <div class="container mx-auto px-6 text-center">
+          <div class="max-w-4xl mx-auto">
+              <h2 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">Your Personal Skincare Journey</h2>
+              <p class="text-xl text-gray-600 mb-8">Discover the perfect products for your skin type and achieve the radiant complexion you deserve</p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                  <button onclick="showPage('products')" class="btn-primary px-8 py-4 rounded-xl text-white font-semibold text-lg">
+                      <i class="fas fa-shopping-bag mr-2"></i>Shop Products
+                  </button>
+                  <button onclick="startQuiz()" class="bg-white border-2 border-[#76a8d7] text-[#76a8d7] px-8 py-4 rounded-xl font-semibold text-lg hover:bg-[#76a8d7] hover:text-white transition-colors">
+                      <i class="fas fa-user mr-2"></i>Get Started
+                  </button>
+              </div>
+          </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+          <div class="text-center mb-16">
+              <h3 class="text-3xl font-bold text-gray-800 mb-4">Why Choose SkinCare Buddy?</h3>
+              <p class="text-gray-600 text-lg">We're committed to your skin's health and beauty</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-8">
+              <div class="feature-card bg-[#a581b7] p-8 text-center">
+                  <div class="w-16 h-16 bg-[#76a8d7] rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                      <i class="fas fa-heart text-white text-2xl"></i>
+                  </div>
+                  <h4 class="text-xl font-semibold text-gray-800 mb-4">Personalized Recommendations</h4>
+                  <p class="text-gray-600">Get product suggestions tailored to your specific skin type and concerns</p>
+              </div>
+              <div class="feature-card bg-[#a581b7] p-8 text-center">
+                  <div class="w-16 h-16 bg-[#d46cb0] rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                      <i class="fas fa-star text-white text-2xl"></i>
+                  </div>
+                  <h4 class="text-xl font-semibold text-gray-800 mb-4">Premium Quality</h4>
+                  <p class="text-gray-600">Only the finest, dermatologist-tested products for your skincare routine</p>
+              </div>
+              <div class="feature-card bg-[#a581b7] p-8 text-center">
+                  <div class="w-16 h-16 bg-gradient-to-r from-[#76a8d7] to-[#d46cb0] rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                      <i class="fas fa-chart-line text-white text-2xl"></i>
+                  </div>
+                  <h4 class="text-xl font-semibold text-gray-800 mb-4">Skin Concerns & Solutions</h4>
+                  <p class="text-gray-600">Offers tips and solutions for common issues like acne, pigmentation, dryness, or aging. </p>
+              </div>
+          </div>
+      </div>
+    </section>
+
+<!-- Skin Type Quiz Section -->
+<section id="quizSection" class="py-16 container mx-auto hidden">
+  <div class="max-w-2xl mx-auto bg-white rounded-3xl shadow-lg p-8 text-center">
+    <h3 class="text-2xl font-bold mb-6">Find Your Skin Type</h3>
+    <p id="quizQuestion" class="text-lg mb-6"></p>
+    <div id="quizOptions" class="flex flex-col gap-4 mb-6"></div>
+    
+    <div class="flex justify-between items-center">
+      <button id="prevQuiz" class="btn secondary px-6 py-2 rounded-xl bg-gray-200 text-gray-700" disabled>Previous</button>
+      <button id="nextQuiz" class="btn primary px-6 py-2 rounded-xl bg-[#d46cb0] text-white">Next</button>
+    </div>
+    
+    <div class="w-full h-2 bg-gray-200 rounded-full mt-6">
+      <div id="quizProgress" class="h-2 bg-[#76a8d7] rounded-full w-0"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Quiz Result Section -->
+<section id="quizResult" class="py-16 container mx-auto hidden">
+  <div class="max-w-xl mx-auto bg-white rounded-3xl shadow-lg p-8 text-center">
+    <h3 class="text-2xl font-bold mb-4">Your Skin Type is:</h3>
+    <p id="skinType" class="text-xl font-semibold mb-4 text-[#d46cb0]"></p>
+    <p id="skinTips" class="text-gray-600 mb-6"></p>
+    <button onclick="startQuiz()" class="btn primary px-6 py-2 rounded-xl bg-[#76a8d7] text-white">Retake Quiz</button>
+  </div>
+</section>
+    <!-- Quiz Result -->
+    <section id="quizResult" class="page-container hidden bg-white rounded-3xl p-8 shadow-lg mt-12 max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-4">Your Skin Type: <span id="skinType"></span></h2>
+        <p class="mb-4" id="skinTips"></p>
+        <button class="btn primary mt-4" onclick="showPage('products')">View Recommended Products</button>
+    </section>
+  </div>
+<!-- Products Page -->
+<!-- Products Page -->
+<div id="products-page" class="page-container">
+  <section class="py-16 container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h3 class="text-3xl font-bold text-gray-800 mb-4">✨ Our Collection</h3>
+      <p class="text-gray-600 text-lg">Browse our handpicked selection of premium skincare essentials</p>
+    </div>
+
+    <!-- ✅ Only one grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Product 1 -->
+      <div class="bg-white shadow rounded p-4 text-center">
+        <img src="images/screenshot-248.png" alt="Hydrating Face Cream" class="w-full h-64 object-cover mb-4 rounded">
+        <h4 class="text-lg font-semibold mb-2">Hydrating Face Cream</h4>
+        <p class="text-gray-600 mb-2">Nourish your skin with natural ingredients.</p>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded">Buy Now</button>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="bg-white shadow rounded p-4 text-center">
+        <img src="images/screenshot-256.png" alt="Vitamin C Serum" class="w-full h-64 object-cover mb-4 rounded">
+        <h4 class="text-lg font-semibold mb-2">Vitamin C Serum</h4>
+        <p class="text-gray-600 mb-2">Brighten your skin naturally.</p>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded">Buy Now</button>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="bg-white shadow rounded p-4 text-center">
+        <img src="images/screenshot-257.png" alt="Aloe Vera Gel" class="w-full h-64 object-cover mb-4 rounded">
+        <h4 class="text-lg font-semibold mb-2">Aloe Vera Gel</h4>
+        <p class="text-gray-600 mb-2">Soothes and hydrates skin instantly.</p>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded">Buy Now</button>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="bg-white shadow rounded p-4 text-center">
+        <img src="images/screenshot-265.png" alt="Gentle Face Wash" class="w-full h-64 object-cover mb-4 rounded">
+        <h4 class="text-lg font-semibold mb-2">Gentle Face Wash</h4>
+        <p class="text-gray-600 mb-2">Cleanses deeply without dryness.</p>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded">Buy Now</button>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="bg-white shadow rounded p-4 text-center">
+        <img src="images/screenshot-266.png" alt="Face Moisturizer" class="w-full h-64 object-cover mb-4 rounded">
+        <h4 class="text-lg font-semibold mb-2">Face Moisturizer</h4>
+        <p class="text-gray-600 mb-2">Hydration for glowing skin.</p>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded">Buy Now</button>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="bg-white shadow rounded p-4 text-center">
+        <img src="images/screenshot-267.png" alt="SPF Sunscreen" class="w-full h-64 object-cover mb-4 rounded">
+        <h4 class="text-lg font-semibold mb-2">SPF Sunscreen</h4>
+        <p class="text-gray-600 mb-2">Protects against harmful UV rays.</p>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded">Buy Now</button>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+
+
+  <!-- Login Page -->
+<div id="login-page" class="page-container">
+  <section class="flex justify-center items-center min-h-[70vh]">
+    <div class="bg-white rounded-3xl shadow-xl p-10 w-full max-w-md">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Login to SkinCare Buddy</h2>
+      <form id="loginForm" class="flex flex-col gap-4">
+        <input type="email" id="email" placeholder="Email" required
+          class="border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#76a8d7]">
+        <input type="password" id="password" placeholder="Password" required
+          class="border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#76a8d7]">
+        <button type="submit" class="btn primary w-full mt-2">Login</button>
+      </form>
+      <p class="text-center text-gray-500 mt-4">
+        Don't have an account? 
+        <a href="#" onclick="alert('Signup feature coming soon!')" class="text-[#d46cb0] font-semibold">Sign up</a>
+      </p>
+    </div>
+  </section>
+</div>
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+      <div class="container mx-auto px-6 text-center">
+          <div class="mb-6">
+              <div class="w-12 h-12 bg-gradient-to-r from-[#76a8d7] to-[#d46cb0] rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <i class="fas fa-spa text-white text-xl"></i>
+              </div>
+              <h4 class="text-xl font-semibold mb-2">SkinCare Buddy</h4>
+              <p class="text-gray-400">Radiant skin starts here</p>
+          </div>
+      </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
